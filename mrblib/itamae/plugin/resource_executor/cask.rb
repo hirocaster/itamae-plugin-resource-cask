@@ -5,11 +5,11 @@ module ::MItamae
         def apply
 
           if !current.exist && desired.exist
-            run_command(["brew", "cask", "install", *Array(desired.options), desired.target])
+            run_command(["brew", "install", "--cask", *Array(desired.options), desired.target])
           end
 
           if current.exist && !desired.exist
-            run_command(["brew", "cask", "uninstall", desired.target])
+            run_command(["brew", "uninstall", "--cask", desired.target])
           end
 
           if desired.alfred_linked
@@ -41,9 +41,9 @@ module ::MItamae
           end
         end
 
-        # Optimized `brew cask list`
+        # Optimized `brew list --cask`
         def brew_cask_list
-          "ls -1 $(brew --prefix)/Caskroom"
+          "brew list --cask"
         end
       end
     end
